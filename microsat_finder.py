@@ -20,16 +20,19 @@ def get_arguments() :
 	
 def read_fasta(sequence) :
 	with open(sequence, "r") as filin :
-
 		seq = ""
+
 
 		for line in filin :
 			if line.startswith('>') :
 				if len(seq) < 200 :
+					print(seq, len(seq))
+					#break
 					seq = ""
-				
-			if not line.startswith('>') :
+			elif not line.startswith('>') :
 				seq += line.strip()
+			
+			
 			# else :
 			# 	break
 			# if line.startswith('>') :
@@ -38,8 +41,21 @@ def read_fasta(sequence) :
 			# 	seq += line.strip()
 			# if:
 			# 	break
-		print(line)
-	# print(seq, len(seq))
+		#print(line)
+
+
+	# 	lines = filin.readlines()
+	# 	print(lines[0:100])
+
+	# 	for line in lines :
+	# 		if line.startswith('>') :
+	# 			continue
+	# 		else : 
+	# 			seq += line
+
+	# print(seq[0:100])
+
+	print(seq[0:200], len(seq))
 
 
 def main() :
