@@ -20,49 +20,38 @@ def get_arguments() :
 	
 def read_fasta(sequence) :
 	with open(sequence, "r") as filin :
-		seq = ""
-
-
+		garde = ""
+		seq1 = ""
+		seq2 = ""
 		for line in filin :
 			if line.startswith('>') :
-				if len(seq) < 200 :
-					print(seq, len(seq))
-					#break
-					seq = ""
-			elif not line.startswith('>') :
-				seq += line.strip()
-			
-			
-			# else :
-			# 	break
-			# if line.startswith('>') :
-			# 	continue
-			# elif not line.startswith('>') :
-			# 	seq += line.strip()
-			# if:
-			# 	break
-		#print(line)
+				if len(seq1) > len(garde) :
+					garde = seq1
+				seq2 = seq1
+				seq1 = ""
+			else :
+				seq1 += line.strip()		
 
+	with open(sequence+".txt", "w") as fasta_out :
+		#print(sequence+".txt")
+		for aa in garde :
+			#print(aa)
+			fasta_out.write(aa)
 
-	# 	lines = filin.readlines()
-	# 	print(lines[0:100])
+	return garde
+	
 
-	# 	for line in lines :
-	# 		if line.startswith('>') :
-	# 			continue
-	# 		else : 
-	# 			seq += line
-
-	# print(seq[0:100])
-
-	print(seq[0:200], len(seq))
+def repetition(sequence) :
+	#for aa in sequence :
+	pass	
 
 
 def main() :
 	#path_data = 
 	args = get_arguments()
 
-	read = read_fasta(args.sequence)
+	seq = read_fasta(args.sequence)
+	tandem = repetition(seq)
 
 if __name__ == "__main__" :
 	main()
